@@ -1,0 +1,130 @@
+openapi: 3.0.1
+info:
+  title: "Product Price API"
+  description: "Operations related to product prices"
+  version: "1.0.0"
+paths:
+  /api/prices:
+    post:
+      summary: "Create a new price"
+      description: "Create a new price for a product and brand. If the price overlaps with another price, it will return a 409 status code."
+      requestBody:
+        description: "Price object to be created"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PriceDTO"
+            example:
+              brandId: 1
+              startDate: "2023-01-01T00:00:00"
+              endDate: "2023-12-31T23:59:59"
+              priceList: 1
+              productId: 35455
+              priority: 1
+              price: 100.00
+              curr: "EUR"
+      responses:
+        "200":
+          description: "Price created successfully"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PriceDTO"
+        "400":
+          description: "Invalid input"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "409":
+          description: "Price is overlapping with another price"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /api/prices/{id}:
+    delete:
+      summary: "Delete a price by Id"
+      description: "Delete a price by its ID. If the price does not exist, it will return a 404 status code."
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "ID of the price to delete"
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: "Price deleted successfully"
+        "404":
+          description: "Price not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /api/prices/current:
+    get:
+      summary: "Get current price for a product and brand"
+      description: "Get the current price for a product and brand at a given date. If the price does not exist, it will return a 404 status code."
+      parameters:
+        - name: product_id
+          in: query
+          required: true
+          description: "ID of the product"
+          schema:
+            type: integer
+        - name: brand_id
+          in: query
+          required: true
+          description: "ID of the brand"
+          schema:
+            type: integer
+        - name: date
+          in: query
+          required: true
+          description: "Date to check current price"
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: "Current price found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PriceDTO"
+        "404":
+          description: "Price not found for the given criteria"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  schemas:
+    PriceDTO:
+      type: object
+      properties:
+        brandId:
+          type: integer
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        priceList:
+          type: integer
+        productId:
+          type: integer
+        priority:
+          type: integer
+        price:
+          type: number
+        curr:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
