@@ -1,6 +1,6 @@
 package com.capitole.sisu.products.adapter.in.rest.constraint;
 
-import com.bcnc.payments.adapter.in.rest.dto.PriceDTO;
+import com.capitole.sisu.products.adapter.in.rest.dto.PriceDTO;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
