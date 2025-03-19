@@ -1,4 +1,4 @@
-package com.capitole.sisu.products.port.out.out;
+package com.capitole.sisu.products.port.out;
 
 import com.capitole.sisu.products.domain.price.Price;
 import org.springframework.data.domain.Page;

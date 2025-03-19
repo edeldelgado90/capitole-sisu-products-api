@@ -5,7 +5,7 @@ import com.capitole.sisu.products.adapter.out.repository.CurrentPriceRepository;
 import com.capitole.sisu.products.adapter.out.repository.PriceRepository;
 import com.capitole.sisu.products.domain.price.CurrentPrice;
 import com.capitole.sisu.products.domain.price.Price;
-import com.capitole.sisu.products.port.out.out.DatabasePriceInPort;
+import com.capitole.sisu.products.port.out.DatabasePriceInPort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
