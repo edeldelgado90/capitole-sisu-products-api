@@ -8,7 +8,7 @@ import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 
-public interface RestPricePort extends RestPort<Price> {
+public interface RestPriceInPort extends RestPort<Price> {
 
     Mono<CurrentPrice> getCurrentPrice(Long productId, Long brandId, LocalDateTime date);
 
