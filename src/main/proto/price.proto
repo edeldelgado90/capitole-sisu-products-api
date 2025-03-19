@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.capitole.sisu.products.adapter.in.grpc.proto";
+
+package prices;
+
+import "google/protobuf/timestamp.proto";
+
+service PriceService {
+  rpc getCurrentPriceByProductAndBrand(GetCurrentPriceByProductAndBrandRequest) returns (PriceResponse);
+}
+
+message GetCurrentPriceByProductAndBrandRequest {
+  uint64 productId = 1;
+  uint64 brandId = 2;
+  google.protobuf.Timestamp date = 3;
+}
+
+message PriceResponse {
+  uint64 productId = 6;
+  uint64 brandId = 2;
+  uint64 priceList = 5;
+  google.protobuf.Timestamp startDate = 3;
+  google.protobuf.Timestamp endDate = 4;
+  double price = 8;
+}
