@@ -1,4 +1,4 @@
-package com.capitole.sisu.products.port.out.out;
+package com.capitole.sisu.products.port.out;
 
 import com.capitole.sisu.products.domain.price.CurrentPrice;
 import com.capitole.sisu.products.domain.price.Price;
