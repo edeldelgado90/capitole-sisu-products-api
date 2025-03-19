@@ -2,6 +2,7 @@ package com.capitole.sisu.products.application.config;
 
 import com.capitole.sisu.products.domain.error.ErrorResponse;
 import com.capitole.sisu.products.domain.price.PriceNotFoundException;
+import com.capitole.sisu.products.domain.price.PriceOverlappingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -22,6 +23,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(PriceNotFoundException.class)
     public ResponseEntity<ErrorResponse> handlePriceNotFoundException(PriceNotFoundException ex) {
         return getResponseEntity(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+
+    @ExceptionHandler(PriceOverlappingException.class)
+    public ResponseEntity<ErrorResponse> handlePriceOverlappingException(PriceOverlappingException ex) {
+        return getResponseEntity(HttpStatus.CONFLICT, ex.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
