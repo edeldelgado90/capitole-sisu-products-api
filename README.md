@@ -12,6 +12,12 @@ To run the application locally, you need:
 - **Maven 3.6 or higher**
 - **Docker** (if you want to run the service in a container)
 
+## Features
+
+- **REST API**: Exposes product prices information.
+- **gRPC API**: Exposes the same functionalities as the REST API but through a gRPC interface.
+- **Caching**: Current price data is cached to improve performance.
+
 ## Architecture
 
 The architecture used in this project is Hexagonal Architecture (also known as Ports and Adapters).
@@ -50,7 +56,6 @@ Ports define the interfaces for communication between the core domain and extern
 
 - `Inbound Ports` (used by adapters to interact with the application):
     - `RestPriceInPort` (inside `port.in.rest`): Defines REST-based interactions for prices.
-    - `GRPCPriceInPort` (inside `port.in.rest`): Defines gRPC based interactions for prices.
 - `Outbound Ports` (used by the application to communicate with external systems):
     - `DatabasePriceOutPort` (inside `port.out`): Defines interactions with database for prices.
 
@@ -64,7 +69,6 @@ flowchart TD
         DatabasePriceOutPort["DatabasePriceOutPort"]
     end
     subgraph Inbound["Inbound"]
-        GRPCPriceInPort["GRPCPriceInPort"]
         RestPriceInPort["RestPriceInPort"]
     end
     subgraph Ports["Ports"]
@@ -116,7 +120,7 @@ flowchart TD
    ```
 2. **Build the Project**:
     ```bash
-    mvn clean install
+    mvn clean install -U
     ```
 3. **Run the application**:
     ```bash
